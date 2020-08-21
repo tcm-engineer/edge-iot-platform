@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+  {% block head %}
+    {% if BTadd == 0 %}
+      <meta http-equiv="refresh" content="5">
+
+    {% endif %}
+    
+    <style>
+                    
+      div.lora{
+        position: absolute;
+        top: 130px;
+        right: 70%;
+        width: 500px;
+        height: 500px;
+      }
+      
+      div.charts{
+        position: absolute;
+        right: 31.5%;
+        top: 425px;
+        width: 1200px;
+        height: 200px;   
+        
+      }
+      
+      div.bt_devices{
+        position: absolute;
+        top: 130px;
+        right: 22%;
+        width: 1000px;
+        height: 500px;
+      }
+
+      div.ble_pi{
+        position: absolute;
+        top: 130px;
+        right: 29%;
+        width: 500px;
+        height: 500px;
+      }
+            
+      div.cloud{
+        position: absolute;
+        top: 130px;
+        right: 11%;
+        width: 500px;
+        height: 500px;
+      }
+      
+
+      
+      
+      img.alldevices{
+        max-width: 100%;
+        margin: 0 auto;
+        border: none;
+        display: block;
+        padding: 0px;
+        height: auto;
+      }
+    </style>
+  {% endblock %}
+
+  {% block body %} 
+
+    <!-- Display navigation bar -->
+    <ul>
+      <li class="title">IoT Hub</li> 
+      <li><a href="http://127.0.0.1:5000">Home</a></li>    
+      <li><a href="http://127.0.0.1:5000/actuators">Actuators</a></li>
+      <li><a class="active" href="http://127.0.0.1:5000/sensors">Sensors</a></li>
+      <li class="extension"> </li> 
+      <li><a href="http://127.0.0.1:5000/about">About</a></li>
+    </ul>
+    
+    <!-- Display LoPy sensor information -->
+    <div class="lora">  
+    
+    <h3>LoRa <br><div style="font-size: 25px;">LoPy Sensor {{ identity }}</div></br></h3> <!-- Read LoPy identity passed from Python via Flask -->
+
+    <p><b>Temperature:</b> {{ temp }}°C</p>                          <!-- Read temperature value passed from Python via Flask -->
+    <p><b>Relative Humidity:</b> {{ humidity }}%</p>                 <!-- Read humidity value passed from Python via Flask -->
+    <p><b>Illuminance:</b> Blue: {{ blue }}lx, Red: {{ red }}lx</p>  <!-- Read illuminance values identity passed from Python via Flask -->
+    
+    
+    <!-- Display sensor data as graph button calling function "display_charts" -->
+    <form action ="display_charts">                                               
+      {% if display_chart == 0 %}
+        <button class="button" type="submit"><b>Display Charts</b></button>
+      {% else%}
+        <button class="button_active" type="submit"><b>Display Charts</b></button>
+      {% endif %}  
+    </form>
+
+    </div>
+
+
+    <!-- If "display_chart" button tiggered, display graphs -->
+    <div class="charts">     
+      {% if display_chart != 0 %}
+        <img src="{{ temp_filename }}" alt="Temperature Chart" width=400 height=300 /> 
+        <img src="{{ humidity_filename }}" alt="Humidity Chart" width=400 height=300 /> 
+      {% endif %}     
+    </div>     
+
+
+    <!-- Bluetooth Classic, who's home scan -->
+    <div class="bt_devices">  
+      <h3>Bluetooth Classic <br><div style="font-size: 25px;">Who's Home Scan</div></br></h3> 
+
+      
+      <!-- Display the names of all the members who are home -->
+      {% for name in bt_names %}
+       <br> {{ name }} </br>
+      {% endfor %}
+      
+      <!-- Add new member button pressed calling function "bt_button" -->
+      <form action ="bt_button">
+        {% if bt_add == 0 %}
+          <button class="button" type="submit"><b>Add Bluetooth Device</b></button>
+        {% else %}
+          <button class="button_active" type="submit"><b>Add Bluetooth Device</b></button>
+        {% endif %}
+      </form>
+      
+      <!-- If 'Add Bluetooth Device' button pressed request MAC address and a identifier -->
+      {% if bt_add != 0 %}
+        <form method="POST" action="bt_enter">
+          <br>Bluetooth MAC Address:<input name="bt_mac"></br>                        <!-- Enter MAC address -->
+          Name Identifier:<input name="bt_name"></br>                                 <!-- Enter name identifier -->
+          <button class="button" type = "submit" value="submit"><b>Enter</b></button> <!-- Confirm entry details button-->
+        </form>
+      {% endif %}
+      
+      <!-- Display error if entered MAC address or name identifier incorrect -->
+      <!-- Python via Flask runs MAC address check to determine if format is of entered address is correct -->
+      {% if bt_error == 1 %}
+        <p><b>ERROR:</b> MAC address already entered.</p> 
+      {% endif %}
+
+      {% if bt_error == 2 %}
+        <p><b>ERROR:</b> Name identifier already entered.</p> 
+      {% endif %}
+
+      {% if bt_error == 3 %}
+        <p><b>ERROR:</b> MAC address and name identifier already entered.</p> 
+      {% endif %}
+    </div>
+
+
+
+    
+
+    <!-- Read BLE Raspberry Pi door system characteristics passed from Python via Flask -->
+    <div class="ble_pi">
+      <h3>BLE <br><div style="font-size: 25px;">Door Sensor</div></br></h3>
+      <!-- Door system PIR sensor chaacteristic determines if it is activated or not-->
+      {% if pi_pir == "0" %}
+        <p><b>PIR Sensor:</b> Not Activated</p>
+      {% else %}
+        <p><b>PIR Sensor:</b> Activated</p>
+      {% endif %}
+      
+      <!-- Door system reed switch chaacteristic determines if the door is open or closed-->
+      {% if pi_reed_switch == "0" %}
+        <p><b>Door:</b> Closed </p>
+      {% else %}
+        <p><b>Door:</b> Open </p>
+      {% endif %}
+    </div>
+
+    <!-- Cloud file storage button pressed, calling function 'cloud_storage'-->
+    <div class="cloud">
+      <h3>  <br><div style="font-size: 25px;">Cloud Storage</div></br></h3>
+      <form action ="cloud_storage">
+          <button class="button" type="submit"><b>Save Data to Cloud</b></button>
+      </form>
+    </div>
+  {% endblock %}

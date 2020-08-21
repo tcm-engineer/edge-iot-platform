@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+  {% block head %}
+    <style>
+      
+      div.ESP{
+        position: absolute;
+        top: 130px;
+        right: 70%;
+        width: 500px;
+        height: 500px;
+      }
+
+      div.TradBulb{
+        position: absolute;
+        top: 130px;
+        right: 45%;
+        width: 500px;
+        height: 500px;
+      }
+      
+      div.TradSock{
+        position: absolute;
+        top: 130px;
+        right: 20%;
+        width: 500px;
+        height: 500px;
+      }
+      
+    </style>
+  {% endblock %}
+
+
+  {% block body %}
+  
+    <!-- Display navigation bar -->
+    <ul>
+      <li class="title">IoT Hub</li> 
+      <li><a href="http://127.0.0.1:5000">Home</a></li>    
+      <li><a class="active" href="http://127.0.0.1:5000/actuators">Actuators</a></li>
+      <li><a href="http://127.0.0.1:5000/sensors">Sensors</a></li>
+      <li class="extension"> </li> 
+      <li><a href="http://127.0.0.1:5000/about">About</a></li>
+    </ul>
+
+    <!-- NodeMCU ESP2866 Thermostat -->
+    <div class="ESP">
+      <h3>MQTT over WiFi<br><div style="font-size: 25px;">NodeMCU Thermostat</div></br></h3>
+
+      <!-- Select temperature mode button, calling function "temperatureMode" -->    
+      <form action="temperatureMode">
+        <button class="button" type="submit"><b>
+          <!-- Read temperature mode selected from Python via Flask -->
+          {% if temp_mode == 0 %}       
+            Manual Temperature Mode
+          {% else %}
+            Automatic Temperature Mode
+          {% endif %}
+        </b></button>
+      </form>
+      
+      <!-- Automatic temperature mode selected, read from Python via Flask -->
+      {% if temp_mode != 0 %}
+        <!-- Read entered target temperature from user, calling funtion "temperatureInput" -->
+        <div style="padding-top: 10px;"><form method="POST" action="temperatureInput">
+          <input name="temp_input">
+          <button class="button" type = "submit" value="submit"><b>Temperature Select</b></button>
+        </form>
+        <p><b>Target Temperature: </b>{{ temp_input }}°C </p></div>  <!-- Display entered target temperature -->     
+      {% endif %}
+
+      <!-- Manual temperature mode selected, read from Python via Flask -->
+      {% if temp_mode == 0 %}
+      <form action ="espLEDToggle">
+        {% if esp_toggle == 0 %}
+          <div style="padding-top: 10px; width: 200px;"><button class="button_off" type="submit"><b>
+            Thermostat OFF
+          </b></button></div> 
+        {% else %}
+          <div style="padding-top: 10px; width: 200px;"><button class="button_on" type="submit"><b>
+            Thermostat ON
+          </b></button></div> 
+        {% endif %}
+      </form>
+      {% endif %}
+    </div>
+    
+
+    <!-- Tradfri Zigbee Light Blub -->
+    <div class="TradBulb">
+      
+      <!-- Tradfri Zigbee light bulb -->
+      <h3>Zigbee <br><div style="font-size: 25px;">Trådfri Light Bulb</div></br></h3>
+      
+      <!-- Slider bar to select intensity of light bulb, calling function "lightDimmer" -->
+      <form method="POST" action="lightDimmer">
+        <!-- range of intensity is 0-254, call function sliderChange to get selected slider value -->
+        <input type="range" min="0" max="254" onChange="sliderChange(this.value)" name="slider">
+        <button class="button" type = "submit" value="submit"><b>Enter Brightness</b></button>
+      </form>
+      
+      <!-- Display brightness of bulb -->
+      <h3 id="sliderStatus"> </h3>
+      <p><b>Brightness: </b> {{ slider }}</p>
+      
+      <!-- JavaScript function to read the value of slider bar -->
+      <script >
+        function sliderChange(val){
+          document.getElementById('sliderStatus').innerHTML = val;
+        }
+      </script>
+      
+      <!-- Call function "lightToggle" when bulb on/off button pressed -->
+      <form action="lightToggle">
+        {% if light_toggle == 0 %}
+          <button class="button_off" type="submit"><b>   
+            Tradfri Light Bulb OFF
+          </b></button>
+        {% else %}
+          <button class="button_on" type="submit"><b>
+            Tradfri Light Bulb ON
+          </b></button>
+        {% endif %}
+      </form>      
+
+    </div>
+    
+    
+    <!-- Tradfri Zigbee Wall Plug-->
+    <div class="TradSock">
+      
+      <!-- Tradfri Zigbee light bulb -->
+      <h3>Zigbee <br><div style="font-size: 25px;">Trådfri Wall Plug</div></br></h3>
+      
+      <!-- Call function "socketToggle" when wall plug on/off button pressed -->
+      <form action="socketToggle">
+        {% if socket_toggle == 0 %}
+          <button class="button_off" type="submit"><b>   
+            Tradfri Wall Plug OFF
+          </b></button>
+        {% else %}
+          <button class="button_on" type="submit"><b>
+            Tradfri Wall Plug ON
+          </b></button>
+        {% endif %}
+      </form>  
+  {% endblock %}

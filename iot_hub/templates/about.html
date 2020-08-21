@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+  {% block head %}
+    <style> 
+      
+      div.info{
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        font-size: 25px; 
+      }
+
+    </style>
+  {% endblock %}
+  
+  
+
+  {% block body %}
+    <ul>
+      <li class="title">IoT Hub</li> 
+      <li><a href="http://127.0.0.1:5000">Home</a></li>    
+      <li><a href="http://127.0.0.1:5000/actuators">Actuators</a></li>
+      <li><a href="http://127.0.0.1:5000/sensors">Sensors</a></li>
+      <li class="extension"> </li> 
+      <li><a class="active" href="http://127.0.0.1:5000/about">About</a></li>
+    </ul>
+
+    <div class="info">
+
+    <p style="text-align: center; font-size: 35px; font-weight: bold;">About the IoT Hub</p>
+    <p style="text-align: center; padding-top: 0px; font-weight: bold;">Author: Thomas Mead (tcm1g17)</p>
+    <p style="text-align: center; padding-top: 35px; text-decoration: underline;">The IoT Hub is a project submitted for the award of MEng Electronic Engineering with Computer Systems. </p>
+    <p style="text-align: center; padding-top: 5px;">The primary focus of this project is technical interoperability, which considers the physical and software compatibility of the devices</br> 
+    including the protocols used to communicate between them. Technical interoperability is a significent issue within the IoT, limiting the scalability </br>
+    of this technology. This project demonstrates a solution to this issue by developing a single edge-based gateway interface for a variety of heterogeneous</br>
+    IoT devices, bridging between disparate communication protocols. The connected devices have been selected to provide</br>
+    smart-home automation functionality.</p>
+    </div>  
+    
+
+  {% endblock %}

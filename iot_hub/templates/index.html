@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+  {% block head %}
+    <style> 
+      
+      .netArch{
+        position: absolute;
+        height: 430px;
+        left: 10px;
+        top: 112px;
+      }
+
+      div.pPosition{
+        position: absolute;
+        top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .imgTitle{
+        font-size: 30px;
+        position: absolute;
+        top: 52px;
+        left: 170px;
+        font-weight: bold;
+      }
+      
+      .tooltip{
+        font-size: 25px;
+        font-family: Georgia, serif;
+        position: absolute;
+        top: 212px;
+        left: 690px;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+      }
+      
+      .tooltip .tooltiptext{
+        font-size: 20px;
+        visibility: hidden;
+        width: 1000px;
+        text-align: left;
+        top: 25px;
+        border-radius: 6px;
+        padding: 5px 20px;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .tooltip .tooltiptext::after{
+        content: "";
+        position: absolute;
+        border-color: #555 transparent;
+      }
+      
+      .tooltip:hover .tooltiptext{
+        visibility: visible;
+        opacity: 1;
+      }
+      
+      .cloud{
+        top: 162px;
+        position: absolute;
+        left: 670px;
+        font-size: 25px; 
+        font-weight: bold;
+      }
+        
+      .edge{
+        top: 282px;
+        position: absolute;
+        left: 670px;
+        font-size: 25px; 
+        font-weight: bold;
+      }
+      
+      .device{
+        top: 402px;
+        position: absolute;
+        left: 670px;
+        font-size: 25px; 
+        font-weight: bold;
+      }
+      
+    </style>
+  {% endblock %}
+  
+  
+
+  {% block body %}
+    <ul>
+      <li class="title">IoT Hub</li> 
+      <li><a class="active" href="http://127.0.0.1:5000">Home</a></li>    
+      <li><a href="http://127.0.0.1:5000/actuators">Actuators</a></li>
+      <li><a href="http://127.0.0.1:5000/sensors">Sensors</a></li>
+      <li class="extension"> </li> 
+      <li><a href="http://127.0.0.1:5000/about">About</a></li>
+    </ul>
+
+    <div class="pPosition">
+
+    <div style="font-size: 22px;"><p>This is a System Overview. Please hover over a element to find out more information about that element.</p></div>
+    
+    <p class="imgTitle">Network Architecture</p>
+    <img src="../static/images/iotHub.png" alt="Network Architecture"  class="netArch"/> 
+    
+    </div>  
+    
+   <div class="cloud"> <p>Cloud Level</p></div>
+   
+    <div class="tooltip"> 
+      Google Cloud Platform
+      <div class="tooltiptext"> 
+        The Google Cloud Platform enables sensor infomation to be stored externally to the user's Google Drive.
+      </div>
+    </div>  
+ 
+    <div class="edge"> <p>Edge Level</p></div>
+       
+    <div style="top: 332px;" class="tooltip"> 
+      IoT Hub
+      <div class="tooltiptext"> 
+        The IoT Hub is a edge-based IoT gateway for a star network topology, communicating to a range of devices over various communication
+        protocols which provide home-automation functionality.
+      </div>
+    </div>
+    
+    <div class="device"> <p>Device Level</p></div>
+       
+    <div style="top: 452px;" class="tooltip"> 
+      NodeMCU Thermostat
+      <div class="tooltiptext"> 
+        The NodeMCU simulates the control of a thermostat by turning a LED on or off, this device communicates through MQTT over WiFi.
+      </div>
+    </div>
+    
+    <div style="top: 522px;" class="tooltip"> 
+      Who's Home Scan
+      <div class="tooltiptext"> 
+        A Bluetooth Classic MAC address scan searches of all known devices and determines that person is home if their device is within proximity.
+      </div>
+    </div>
+    
+    <div style="top: 592px;" class="tooltip"> 
+      LoPy4 Pysense Multi-Sensor
+      <div class="tooltiptext"> 
+        The LoPy4 communicates over LoRa, transmitting the current temperature, humidity and ambient light values read from the interfaced Pysense.
+      </div>
+    </div>
+
+    <div style="top: 662px;" class="tooltip"> 
+      Raspberry Pi Door Sensor System
+      <div class="tooltiptext"> 
+        This device transmits through BLE the state information for the PIR sensor and reed switch, which acts as a proximity sensor and door open or closed sensor respectively.
+      </div>
+    </div>
+    
+    <div style="top: 732px;" class="tooltip"> 
+      Trådfri Gateway
+      <div class="tooltiptext"> 
+        The IoT Hub communicates to the Trådfri Gateway through CoAP over WiFi, through which it is able to control the connected Trådfri Light Bulb and Wall Plug.
+        The Trådfri Gateway communicates the IoT Hub commands to the connected Trådfri devices through Zigbee.
+      </div>
+    </div>
+  {% endblock %}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IoT Hub</title>
+
+    <style>
+      body{
+        background-color: #E0FFFF;
+        color: dimgray;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      h2{
+        font-size: 25px;
+        text-align: left;
+      }
+      
+      h3{
+        font-size: 20px;
+        text-align: left;
+      }
+
+      .title{
+        background-color: #88BBD6;
+        font-size: 30px;
+        padding: 20px 40px;
+        font-family: Georgia, serif;
+        font-style: oblique;
+      }
+
+      .extension{
+        background-color: #88BBD6;
+        font-size: 30px;
+        width: 224px;
+        padding: 37px 112px;
+        font-family: Georgia, serif;
+      }
+
+      p{
+        padding: 0px 10px;
+        text-align: initial;
+        font-family: Georgia, serif;
+      }
+      
+      ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #85DCB;
+      }
+
+      li{
+        float: left;
+      }
+
+      li a{
+        background-color: #88BBD6;
+        text-decoration: none;
+        display: block;
+        color: dimgray;
+        padding: 20px 100px;
+        font-size: 30px;
+        -webkit-transistion-duration: 0.5s;
+        transition-duration: 0.5s;  
+      }
+
+      li a.active, a:hover:not(.active){
+        background-color: #E0FFFF;
+      }
+
+      .button, .button_on, .button_off, button_active{
+        padding: 7px 25px;
+        background-color: lightgray;
+        border: 2px solid gray;
+        text-align: center;
+        text-decoration: none;
+        margin: 4px 2px
+        -webkit-transistion-duration: 0.5s;
+        transition-duration: 0.5s;
+        color: gray;
+        display: inline-block;
+      }
+
+      .button:hover, .button_on:hover, .button_off:hover, .button_active:hover{
+        cursor: pointer;
+      }
+      
+      .button{
+        background-color: lightgray;		
+        color: gray; 
+        border: 2px solid gray; 
+	  }
+
+      .button:hover{
+        background-color: gray;
+        color: white;
+        border: 2px solid gray;
+	  }
+	  
+      .button_on{
+        background-color: lime;
+        color: dimgray;
+        border: 2px solid forestgreen;
+      }
+
+      .button_on:hover{
+        background-color: forestgreen;
+        color: white;
+        border: 2px solid forestgreen;
+      }
+    
+      .button_off{
+        background-color: red;
+        color: white;
+        border: 2px solid firebrick;
+      }
+
+      .button_off:hover{
+        background-color: firebrick;
+        color: white;
+        border: 2px solid firebrick;
+      }
+      
+      .button_active{
+        background-color: gray;
+        color: white;
+        border: 2px solid gray;
+        padding: 7px 25px;
+      }
+      
+      .button_active:hover{
+        background-color: lightgray;
+        color: gray;
+        border: 2px solid gray;
+      }
+      
+      div.logo{
+        position: absolute;
+        top: 0px;
+        right: 90.6%;
+      }
+    </style>
+    
+	{% block head %}
+	{% endblock %}	
+  </head>
+  
+    
+  <body id = "body">
+    
+  <div class = "logo">
+    <img src="static/images/logo.png" alt="IoT Hub Logo" width=160 height=73 />
+  </div>
+  
+  {% block body %}
+	{% endblock %}    
+  </body>
+</html>
