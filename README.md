@@ -25,7 +25,7 @@ Through the web interface, the user can read the status of all connected devices
 Select sensor data can also be saved to the user's personal Google Drive3, providing an external cloud storage. <br/><br/>
 
 ### End Devices
-<i>LoPy4 PySense Multi-Sensorr</i>
+<i>LoPy4 PySense Multi-Sensorr<br/></i>
 The LoPy4 is programmed in MicroPython to communicate through LoRa.This device transmits the temperature, humidity and ambient
 light values from a interfaced Pysense multi-sensor board.When the device is not transmitting, it is configured to deep-sleep mode to
 heavily reduce power consumption.<br/>
@@ -53,6 +53,6 @@ suitable for this function as they use Bluetooth requires minimal power and most
 The application, written in Python, generates a graphical user interface for the system.This interface displays system information, provides
 actuator control, and enables access to cloud storage used for sensor data.The IoT Hub hosts the web server via a Flask application.This
 application combines HTML, CSS and JavaScript files, providing the page template form,style and additional functionality,respectively.
-<br/>
+<br/><br/>
 The Google Cloud Platform was implemented for external storage, which saves the LoPy4 sensor data to the user's personal Google
 Drive.This data is also stored locally on the hub to reduce data access speeds from the cloud.
