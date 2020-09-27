@@ -1,11 +1,11 @@
 # edge-iot-platform
 
-<Strong>Overview</Strong> <br/>
+### Overview
 The primary focus of this project is achieving technical interoperability, which considers the physical and software compatibility of the devices, 
 including the protocols used to communicate between them. The present IoT marketplace ignores this issue, choosing to develop single com-
 munication protocol solutions to specific scenarios. These niche systems are isolated, unable to interact with each other. 
 This forms a plethora of independent IoT systems, often requiring their own gateway, resulting in the installation of a range of gateways
-for different situations. <br/><br/>
+for different situations. <br/>
 
 This project addresses these challenges and provides a prototype solution through the development of an edge-based IoT Hub. The design is a single gateway interface for a
 variety of heterogeneous IoT devices, bridging between disparate communication protocols. 
