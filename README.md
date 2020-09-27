@@ -25,26 +25,26 @@ Through the web interface, the user can read the status of all connected devices
 Select sensor data can also be saved to the user's personal Google Drive3, providing an external cloud storage. <br/><br/>
 
 ### End Devices
-<i>LoPy4 PySense Multi-Sensorr<br/></i>
+<i>LoPy4 PySense Multi-Sensor<br/></i>
 The LoPy4 is programmed in MicroPython to communicate through LoRa.This device transmits the temperature, humidity and ambient
 light values from a interfaced Pysense multi-sensor board.When the device is not transmitting, it is configured to deep-sleep mode to
 heavily reduce power consumption.<br/>
 
-<i>NodeMCU Thermostat</i>
+<i>NodeMCU Thermostat<br/></i>
 The NodeMCU simulates a wireless thermostat through an output LED to indicate if the thermostat is on or off. It is programmed in
 Arduino code and contains an ESP8266WiFi module to communicate to the IoT Hub.The hub uses the most recent temperature readings
 from the LoPy4 to determine the on-off state of the thermostat.<br/>
 
-<i>Tradfri Light Bulb and Wall Plug</i>
+<i>Tradfri Light Bulb and Wall Plug<br/></i>
 Through CoAP overWiFi, commands are sent from the hub to the Tradfri Gateway to enable control of the connected Tradfri devices.
 These devices consisted of a smart, dimmable light bulb and a wall plug.The Zigbee protocol is implemented for Tradfri device-gateway
 connectivity.<br/>
 
-<i>Raspberry Pi BLU Door Sensor Sub-System</i>
+<i>Raspberry Pi BLU Door Sensor Sub-System<br/></i>
 The door sensor sub-system is a Raspberry Pi 3B+ programmed in Python which communicates through Bluetooth Low-Energy (BLE).
 The Pi is integrated with a PIR sensor and a reed switch to provide a proximity sensor and a open-closed state identifier for the door. <br/>
 
-<i>Who's Home Scan</i>
+<i>Who's Home Scan<br/></i>
 The system determines who is home through a Bluetooth classic scan.This scan identifies the resident's mobile phones when they are
 within the 30m Bluetooth proximity of the hub. If the device is found, the system assumes that specific resident is home. Mobile phones are
 suitable for this function as they use Bluetooth requires minimal power and most people do not leave their house without them.<br/><br/>
